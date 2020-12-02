@@ -1,8 +1,6 @@
-import importlib.resources as pkg_resources
+from advent.lib.utils import read_puzzle
 
-import advent.data
-
-data = (pkg_resources.read_text(advent.data, "input_1.txt")).splitlines()
+data = read_puzzle(1)
 
 
 def run_part1():
