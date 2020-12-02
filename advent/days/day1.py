@@ -3,7 +3,7 @@ from advent.lib.utils import read_puzzle
 data = read_puzzle(1)
 
 
-def run_part1():
+def part1():
     num1: int = None
     num2: int = None
 
@@ -17,7 +17,7 @@ def run_part1():
     return num1 * num2
 
 
-def run_part2():
+def part2():
     num1: int = None
     num2: int = None
     num3: int = None
