@@ -16,7 +16,6 @@ def part2():
     print(f"right 5, down 1: {tm.slope(5, 1)}")
     print(f"right 7, down 1: {tm.slope(7, 1)}")
     print(f"right 1, down 2: {tm.slope(1, 2)}")
-    print(tm.slope(1, 1) * tm.slope(3, 1) * tm.slope(5, 1) * tm.slope(7, 1) * tm.slope(1, 2))
     return tm.slope(1, 1) * tm.slope(3, 1) * tm.slope(5, 1) * tm.slope(7, 1) * tm.slope(1, 2)
 
 
