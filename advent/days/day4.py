@@ -79,17 +79,17 @@ class Passport:
         # Birth year, four digits, 1920-2002
         if not len(self.byr) == 4:
             return False
-        if not 1920 <= int(self.byr) <= 2002:
+        if not (1920 <= int(self.byr) <= 2002):
             return False
         # Issue year, four digits, 2010-2020
         if not len(self.iyr) == 4:
             return False
-        if not 2010 <= int(self.iyr) <= 2020:
+        if not (2010 <= int(self.iyr) <= 2020):
             return False
         # Expiry year, four digits, 2020-2030
         if not len(self.eyr) == 4:
             return False
-        if not 2020 <= int(self.eyr) <= 2030:
+        if not (2020 <= int(self.eyr) <= 2030):
             return False
         # Height, 150-193cm or 59-76in
         if not (m := re.match(r"(\d+)(cm|in)", self.hgt)):
@@ -105,7 +105,7 @@ class Passport:
         if self.ecl not in ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]:
             return False
         # PID, nine-digit number
-        if not re.match(r"\d{9}", self.pid):
+        if not re.match(r"\d{9}$", self.pid):
             return False
 
         return True
