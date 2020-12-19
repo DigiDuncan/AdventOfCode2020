@@ -73,37 +73,39 @@ class Passport:
         )
 
     def very_valid(self):
-        try:
-            b = bool(
-                # Birth year, four digits, 1920-2002
-                self.byr is not None
-                and len(self.byr) == 4
-                and 1920 <= int(self.byr) <= 2002
-                # Issue year, four digits, 2010-2020
-                and self.iyr is not None
-                and len(self.iyr) == 4
-                and 2010 <= int(self.iyr) <= 2020
-                # Expiry year, four digits, 2020-2030
-                and self.eyr is not None
-                and len(self.eyr) == 4
-                and 2020 <= int(self.eyr) <= 2030
-                # Height, 150-193cm or 59-76in
-                and self.hgt is not None
-                and (m := re.match(r"(\d+)(cm|in)", self.hgt))
-                and (
-                    (m.group(2) == "cm" and 150 <= int(m.group(1)) <= 193)
-                    or (m.group(2) == "in" and 59 <= int(m.group(1)) <= 76)
-                )
-                # Hair color, lowercase hexcode starting with #
-                and self.hcl is not None
-                and re.match(r"#[a-f0-9]{6}", self.hcl)
-                # Eye color, is in the list of colors
-                and self.ecl is not None
-                and self.ecl in ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]
-                # PID, nine-digit number
-                and self.pid is not None
-                and re.match(r"\d{9}", self.pid)
-            )
-        except Exception:
-            raise
-        return b
+        if not self.valid():
+            return False
+
+        # Birth year, four digits, 1920-2002
+        if not len(self.byr) == 4:
+            return False
+        if not 1920 <= int(self.byr) <= 2002:
+            return False
+        # Issue year, four digits, 2010-2020
+        if not len(self.iyr) == 4:
+            return False
+        if not 2010 <= int(self.iyr) <= 2020:
+            return False
+        # Expiry year, four digits, 2020-2030
+        if not len(self.eyr) == 4:
+            return False
+        if not 2020 <= int(self.eyr) <= 2030:
+            return False
+        # Height, 150-193cm or 59-76in
+        if not (m := re.match(r"(\d+)(cm|in)", self.hgt)):
+            return False
+        if m.group(2) == "cm" and not (150 <= int(m.group(1)) <= 193):
+            return False
+        elif m.group(2) == "in" and not (59 <= int(m.group(1)) <= 76):
+            return False
+        # Hair color, lowercase hexcode starting with #
+        if not re.match(r"#[a-f0-9]{6}", self.hcl):
+            return False
+        # Eye color, is in the list of colors
+        if self.ecl not in ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]:
+            return False
+        # PID, nine-digit number
+        if not re.match(r"\d{9}", self.pid):
+            return False
+
+        return True
