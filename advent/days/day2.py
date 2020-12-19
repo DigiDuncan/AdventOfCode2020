@@ -13,6 +13,7 @@ def part1():
 
     return sum([p.is_good_sled() for p in passwords])
 
+
 def part2():
     passwords = []
 
